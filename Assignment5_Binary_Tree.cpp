@@ -22,59 +22,59 @@ node* createnode(int data){
     return newnode;
 }
 
-void pre_order_traversal_arr(int a[], int index){
-    if((a[index] && index > 1) || (a[index] == 0 && index == 1)){
-        cout<<a[index]<<" ";
-        pre_order_traversal_arr(a, 2*index);
-        pre_order_traversal_arr(a, 2*index + 1);
+void pre_order_traversal_arr(int a[], int i){
+    if((a[i] && i > 1) || (a[i] == 0 && i == 1)){
+        cout<<a[i]<<" ";
+        pre_order_traversal_arr(a, 2*i);
+        pre_order_traversal_arr(a, 2*i + 1);
     }
 }
 /*when the tree is defined as array, the sign of empty must be 0
 since the position where there is no data is defined as 0 by default
 */
 
-void in_order_traversal_arr(int a[], int index){
-    if((a[index] && index > 1) || (a[index] == 0 && index == 1)){
-        in_order_traversal_arr(a, 2*index);
-        cout<<a[index]<<" ";
-        in_order_traversal_arr(a, 2*index + 1);
+void in_order_traversal_arr(int a[], int i){
+    if((a[i] && i > 1) || (a[i] == 0 && i == 1)){
+        in_order_traversal_arr(a, 2*i);
+        cout<<a[i]<<" ";
+        in_order_traversal_arr(a, 2*i  + 1);
     }
 }
 
-void post_order_traversal_arr(int a[], int index){
-    if((a[index] && index > 1) || (a[index] == 0 && index == 1)){
-        post_order_traversal_arr(a, 2*index);
-        post_order_traversal_arr(a, 2*index + 1);
+void post_order_traversal_arr(int a[], int i){
+    if((a[i] && i > 1) || (a[i] == 0 && i == 1)){
+        post_order_traversal_arr(a, 2*i);
+        post_order_traversal_arr(a, 2*i + 1);
         cout<<a[index]<<" ";
     }
 }
 
 void pre_order_traversal_pt(node* root){
     if(!root) return;
-    node* stack[max_size];
+    node* s[max_size];
     int top = -1;
-    stack[++top] = root;
+    s[++top] = root;
     while(top >= 0){
-        node* current = stack[top--];
+        node* current = s[top--];
         cout<<current->data<<" ";
         if(current->right)
-            stack[++top] = current->right;
+            s[++top] = current->right;
         if(current->left)
-            stack[++top] = current->left;
+            s[++top] = current->left;
     }
 }
 
 void in_order_traversal_pt(node* root){
     if(!root) return;
-    node* stack[max_size];
+    node* s[max_size];
     int top = -1;
     node* current = root;
     while(current || top >= 0){
         while(current){
-            stack[++top] = current;
+            s[++top] = current;
             current = current->left;
         }
-        current = stack[top--];
+        current = s[top--];
         cout<<current->data<<" ";
         current = current->right;
     }
