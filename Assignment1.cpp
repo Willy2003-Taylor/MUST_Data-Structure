@@ -1,27 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
-int res[40000];
-int main(){
-    memset(res, -1, sizeof(res));
-    int j = 0;
-    res[0] = 1;
-    for(int i = 2;i <= 10000;i++){
-        j = 0;
-        while(res[j] != -1){
-            res[j] = res[j] * i;
-            j++;
+void factorial(int n){
+    vector<int> result;
+    result.push_back(1);
+    for(int i = 2; i <= n; i++){
+        int carry = 0;
+        for(int j = 0; j < result.size(); j++){
+            int product = result[j] * i + carry;
+            result[j] = product % 10;
+            carry = product / 10;
         }
-        for(j = 0;res[j] != -1;j++){
-            if(res[j+1] != -1)
-                res[j+1] = res[j+1] + res[j]/10;
-            else{
-                if(res[j]/10 != 0)
-                    res[j+1] = res[j]/10;
-            }
-            res[j] = res[j]%10;
+        while(carry){
+            result.push_back(carry % 10);
+            carry /= 10;
         }
     }
-    for(int i = j-1;i >= 0;i--)
-        cout<<res[i];
+    for(int i = result.size() - 1; i >= 0; i--)
+        cout<<result[i];
+    
+}
+int main(){
+    int n = 10000;
+    factorial(n);
     return 0;
 }
