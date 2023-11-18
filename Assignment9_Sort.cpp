@@ -121,16 +121,34 @@ void quick_sort(vector<int>& arr, int left,int right){
     if(i<=right) quick_sort(arr, i, right);
 }
 
+void count_sort(vector<int>& arr, int n){
+    int maxm = *max_element(arr.begin(), arr.end());
+    int minm = *min_element(arr.begin(), arr.end());
+
+    vector<int> count(maxm + 1, 0);
+
+    for(int i = 0; i < n; i++)
+        count[arr[i]]++;
+    for(int i = minm; i <= maxm; i++){
+        if(count[i] > 0)
+            for(int j = 0; j < count[i]; j++)
+                cout<<i<<" ";
+        else continue;
+    }
+}
 
 int main(){
     vector<int> arr1 = {64, 25, 12, 22, 11};
     vector<int> arr2 = {7, 4, -2, 19, 13, 6};
     vector<int> arr3 = {23, 38, 22, 45, 23, 67, 31, 15, 41};
     vector<int> arr4 = {9, 13, 8, 2, 5, 13, 7, 1, 15, 11};
+    vector<int> arr5 = {14, 33, 27, 35, 10, 25, 19};
+
     int n1 = arr1.size();
     int n2 = arr2.size();
     int n3 = arr3.size();
     int n4 = arr4.size();
+    int n5 = arr5.size();
 
     selection_sort(arr1, n1);
     for(int i = 0; i < n1; i++)
@@ -160,5 +178,7 @@ int main(){
     for(int i = 0; i < n4; i++)
         cout<<arr4[i]<<" ";
     cout<<endl;
+
+    count_sort(arr5, n5);
     return 0;
 }
